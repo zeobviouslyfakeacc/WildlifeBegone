@@ -1,15 +1,6 @@
 {
 	"Logging": false,
-	"SpawnerGroups": {
-		"RerollActiveSpawnersTimeMultiplier": 2.0,
-		"ActiveSpawnerCountMultiplier": 0.4
-	},
 	"SpawnRates": {
-		"None": {
-			"SpawnRegionActiveTimeMultiplier": 1.0,
-			"MaximumRespawnsPerDayMultiplier": 1.0,
-			"MaximumSpawnedAnimalsMultiplier": 1.0
-		},
 		"Wolf": {
 			"SpawnRegionActiveTimeMultiplier": 0.1,
 			"MaximumRespawnsPerDayMultiplier": 0.1,
@@ -34,6 +25,15 @@
 			"SpawnRegionActiveTimeMultiplier": 1.0,
 			"MaximumRespawnsPerDayMultiplier": 0.4,
 			"MaximumSpawnedAnimalsMultiplier": 1.0
+		},
+		"None": {
+			"SpawnRegionActiveTimeMultiplier": 1.0,
+			"MaximumRespawnsPerDayMultiplier": 1.0,
+			"MaximumSpawnedAnimalsMultiplier": 1.0
 		}
+	},
+	"SpawnerGroups": {
+		"RerollActiveSpawnersTimeMultiplier": 2.0,
+		"ActiveSpawnerCountMultiplier": 0.4
 	}
 }
