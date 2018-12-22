@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
@@ -23,6 +24,9 @@ namespace WildlifeBegone {
 
 			string configJson = File.ReadAllText(configPath, Encoding.UTF8);
 			config = WildlifeBegoneConfig.Parse(configJson);
+
+			Version version = Assembly.GetExecutingAssembly().GetName().Version;
+			Debug.Log("[WildlifeBegone] Version " + version + " loaded!");
 		}
 
 		private static void CopyDefaultConfigFile(string configPath) {
