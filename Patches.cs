@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using Harmony;
 using UnityEngine;
 
@@ -8,8 +9,11 @@ namespace WildlifeBegone {
 
 		[HarmonyPatch(typeof(SpawnRegion), "Start", new Type[0])]
 		private class SpawnRegionPatch {
-			static void Prefix(SpawnRegion __instance) {
-				bool m_StartHasBeenCalled = (bool) AccessTools.Field(typeof(SpawnRegion), "m_StartHasBeenCalled").GetValue(__instance);
+
+			private static readonly FieldInfo startHasBeenCalled = AccessTools.Field(typeof(SpawnRegion), "m_StartHasBeenCalled");
+
+			private static void Prefix(SpawnRegion __instance) {
+				bool m_StartHasBeenCalled = (bool) startHasBeenCalled.GetValue(__instance);
 				if (m_StartHasBeenCalled || GameManager.IsStoryMode())
 					return;
 
