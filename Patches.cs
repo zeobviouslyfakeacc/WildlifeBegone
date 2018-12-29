@@ -64,8 +64,10 @@ namespace WildlifeBegone {
 
 		[HarmonyPatch(typeof(RandomSpawnObject), "Start", new Type[0])]
 		private static class RandomSpawnObjectPatch {
-			static void Prefix(RandomSpawnObject __instance) {
-				if (GameManager.IsStoryMode() || __instance.m_RerollAfterGameHours <= 0.0)
+			private static void Prefix(RandomSpawnObject __instance) {
+				if (!IsSpawnerRSO(__instance))
+					return;
+				if (GameManager.IsStoryMode() && !WildlifeBegone.Config.enableInStoryMode)
 					return;
 
 				float oldRerollTime = __instance.m_RerollAfterGameHours;
@@ -87,16 +89,24 @@ namespace WildlifeBegone {
 							oldMaxObjects, __instance.m_NumObjectsToEnableStalker);
 				}
 			}
+
+			private static bool IsSpawnerRSO(RandomSpawnObject rso) {
+				foreach (GameObject go in rso.m_ObjectList) {
+					if (go && !go.GetComponent<SpawnRegion>())
+						return false;
+				}
+				return true;
+			}
 		}
 
 		[HarmonyPatch(typeof(ConsoleManager), "RegisterCommands", new Type[0])]
 		private static class AddConsoleCommands {
-			static void Postfix() {
+			private static void Postfix() {
 				uConsole.RegisterCommand("animals_count", new uConsole.DebugCommand(CountAnimals));
 				uConsole.RegisterCommand("animals_kill_all", new uConsole.DebugCommand(KillAllAnimals));
 			}
 
-			const int numAnimalTypes = 6;
+			private const int numAnimalTypes = 6;
 
 			private static void CountAnimals() {
 				int[] counts = new int[numAnimalTypes];
