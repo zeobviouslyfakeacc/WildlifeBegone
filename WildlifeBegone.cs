@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 
 namespace WildlifeBegone {
-	internal class WildlifeBegone {
+	internal static class WildlifeBegone {
 
 		private const string configFileName = "WildlifeBegoneConfig.json";
 

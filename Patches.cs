@@ -5,10 +5,10 @@ using Harmony;
 using UnityEngine;
 
 namespace WildlifeBegone {
-	internal class Patches {
+	internal static class Patches {
 
 		[HarmonyPatch(typeof(SpawnRegion), "Start", new Type[0])]
-		private class SpawnRegionPatch {
+		private static class SpawnRegionPatch {
 
 			private static readonly FieldInfo startHasBeenCalled = AccessTools.Field(typeof(SpawnRegion), "m_StartHasBeenCalled");
 
@@ -63,7 +63,7 @@ namespace WildlifeBegone {
 		}
 
 		[HarmonyPatch(typeof(RandomSpawnObject), "Start", new Type[0])]
-		private class RandomSpawnObjectPatch {
+		private static class RandomSpawnObjectPatch {
 			static void Prefix(RandomSpawnObject __instance) {
 				if (GameManager.IsStoryMode() || __instance.m_RerollAfterGameHours <= 0.0)
 					return;
@@ -90,7 +90,7 @@ namespace WildlifeBegone {
 		}
 
 		[HarmonyPatch(typeof(ConsoleManager), "RegisterCommands", new Type[0])]
-		private class AddConsoleCommands {
+		private static class AddConsoleCommands {
 			static void Postfix() {
 				uConsole.RegisterCommand("animals_count", new uConsole.DebugCommand(CountAnimals));
 				uConsole.RegisterCommand("animals_kill_all", new uConsole.DebugCommand(KillAllAnimals));
