@@ -18,11 +18,13 @@ namespace WildlifeBegone {
 		}
 
 		internal readonly bool logging;
+		internal readonly bool enableInStoryMode;
 		internal readonly RSOSettings rsoSettings;
 		internal readonly Dictionary<int, SpawnRateSetting> spawnRates;
 
 		private WildlifeBegoneConfig(ConfigProxy proxy) {
 			logging = proxy.Logging;
+			enableInStoryMode = proxy.EnableInStoryMode;
 
 			rsoSettings = proxy.SpawnerGroups;
 			if (rsoSettings == null) {
@@ -54,6 +56,7 @@ namespace WildlifeBegone {
 
 		private class ConfigProxy {
 			public bool Logging = false;
+			public bool EnableInStoryMode = false;
 			public RSOSettings SpawnerGroups = null;
 			public Dictionary<string, SpawnRateSetting> SpawnRates = null;
 		}

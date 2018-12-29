@@ -14,7 +14,7 @@ namespace WildlifeBegone {
 
 			private static void Prefix(SpawnRegion __instance) {
 				bool m_StartHasBeenCalled = (bool) startHasBeenCalled.GetValue(__instance);
-				if (m_StartHasBeenCalled || GameManager.IsStoryMode())
+				if (m_StartHasBeenCalled || (GameManager.IsStoryMode() && !WildlifeBegone.Config.enableInStoryMode))
 					return;
 
 				GameObject spawnedObject = __instance.m_SpawnablePrefab;
